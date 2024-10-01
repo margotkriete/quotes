@@ -1,27 +1,24 @@
 import express from 'express';
+import { neon } from '@neondatabase/serverless';
+import { drizzle } from 'drizzle-orm/neon-http';
+import { pgTable, serial, text } from 'drizzle-orm/pg-core';
+
+export const posts = pgTable('posts', {
+  id: serial('id').primaryKey(),
+  title: text('title').notNull(),
+  author: text('author').notNull(),
+  url: text('url').notNull(),
+  note: text('note')
+});
 
 const router = express.Router();
 
-router.get('/hello', async (_req, res) => {
-  res.status(200).json({ message: 'test' });
+router.get('/posts', async (_req, res) => {
+  require('dotenv').config() 
+  const sql = neon(process.env.DATABASE_URL!);
+  const db = drizzle(sql);
+  const result = await db.select().from(posts);
+  res.status(200).json({ message: result });
 });
 
 export default router;
-
-  // const [message, setMessage] = useState("default");
-  // import {
-  //   Route,
-  //   BrowserRouter as Router,
-  //   Routes as Switch,
-  // } from "react-router-dom";
-  
-  // useEffect(() => {
-  //   fetch("/api/hello")
-  //     .then((response) => response.json())
-  //     .then((data) => setMessage(data.message));
-  // }, []);
-
-  // <Switch>
-  {/* <Route path="/about" element={<main>About</main>} /> */}
-  {/* <Route path="/" element={<main>Home</main>} /> */}
-// </Switch>

@@ -1,14 +1,12 @@
-import React from "react";
-import styles from "./App.module.css";
+import React, { useEffect, useState } from "react";
 import {
   Routes as Switch,
   Route,
   BrowserRouter as Router,
 } from "react-router-dom";
 import PostDetail from "./PostDetail";
-import Header from "./components/Header";
+import Grid from "./components/Grid";
 import Upload from "./Upload";
-import PhotoCard from "./components/PhotoCard";
 
 function App(): JSX.Element {
   return (
@@ -16,27 +14,10 @@ function App(): JSX.Element {
       <Router>
         <Switch>
           <Route path="/" element={<Grid />} />
-          <Route path="/post/:id" element={<PostDetail title="blah" />} />
+          <Route path="/post/:id" element={<PostDetail />} />
           <Route path="/upload" element={<Upload />} />
         </Switch>
       </Router>
-    </>
-  );
-}
-
-function Grid(): JSX.Element {
-  return (
-    <>
-      <div className={styles.Container}>
-        <div className={styles.App}>
-          <Header />
-          <PhotoCard />
-          <PhotoCard />
-          <PhotoCard />
-          <PhotoCard />
-          <PhotoCard />
-        </div>
-      </div>
     </>
   );
 }

@@ -31,3 +31,7 @@
 .Title {
   font-family: 'GT-Alpina-Italic';
 }
+
+.PostDetail {
+  grid-column: 100px;
+}
