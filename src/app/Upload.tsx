@@ -6,8 +6,8 @@ export default function Upload(): JSX.Element {
   return (
     <>
       <div className={styles.Container}>
-        <div className={styles.App}>
-          <Header />
+        <div className={styles.Grid}>
+          <Header title="Upload" />
         </div>
       </div>
     </>

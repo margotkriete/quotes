@@ -15,16 +15,18 @@ export default function Grid(): JSX.Element {
   return (
     <>
       <div className={styles.Container}>
-        <div className={styles.App}>
+        <div className={styles.Grid}>
           <Header />
           {posts.map((p) => (
-            <PhotoCard
-              id={p.id}
-              key={p.id}
-              title={p.title}
-              author={p.author}
-              url={p.url}
-            />
+            <>
+              <PhotoCard
+                id={p.id}
+                key={p.id}
+                title={p.title}
+                author={p.author}
+                url={p.url}
+              />
+            </>
           ))}
         </div>
       </div>

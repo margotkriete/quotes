@@ -1,17 +1,18 @@
 .Container {
-  display: grid;
+  display: flex;
+  justify-content: center;
 }
 
-.App {
-  place-self: center;
+.Grid {
   display: grid;
-  width: 800px;
+  grid-template-columns: repeat(4, 1fr);
+  width: 850px;
   gap: 15px;
   padding-top: 50px;
 }
 
-.App-header {
-  grid-column: 1 / span 4;
+.Grid-header {
+  grid-column: 1 / span 4; 
 }
 
 
@@ -24,8 +25,8 @@
   padding: 0;
 }
 
-.PhotoCard {
-  display: grid;
+.PhotoCard a {
+  display: block;
 }
 
 .Title {
