@@ -1,0 +1,11 @@
+.PhotoCard a, span {
+    display: block;
+}
+  
+.Title {
+    font-family: 'GT-Alpina-Italic';
+}
+
+.PhotoCard img {
+    width: 200px;
+}

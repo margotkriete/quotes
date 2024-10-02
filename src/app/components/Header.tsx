@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../App.module.css";
+import styles from "./Header.module.css";
 import { Link } from "react-router-dom";
 
 interface HeaderProps {
@@ -12,10 +12,10 @@ export default function Header({
   breadcrumbs,
 }: HeaderProps): JSX.Element {
   return (
-    <header className={styles["Grid-header"]}>
+    <header className={styles.GridHeader}>
       <Link to="/">{title ? title : "Quotes"}</Link>{" "}
       {breadcrumbs && `> ${breadcrumbs}`}
-      <hr className={styles.line} />
+      <hr className={styles.HeaderLine} />
     </header>
   );
 }

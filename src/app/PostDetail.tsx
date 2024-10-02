@@ -19,7 +19,7 @@ export default function PostDetail(): JSX.Element {
         <div className={styles.Container}>
           <div className={styles.Grid}>
             <Header breadcrumbs={`${post.title}, ${post.author}`} />
-            <div className={styles.PostDetail}>
+            <div>
               <img src={post.url} width={500} />
             </div>
           </div>

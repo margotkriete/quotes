@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styles from "../App.module.css";
+import styles from "./PhotoCard.module.css";
 
 interface PhotoCardProps {
   id: number;
@@ -18,12 +18,10 @@ export default function PhotoCard({
   return (
     <div className={styles.PhotoCard}>
       <Link to={`/post/${id}`}>
-        <img src={url} width={200} />
+        <img src={url} />
       </Link>
-      <Link className={styles.Title} to="/post/1">
-        {title}
-      </Link>
-      <Link to="/post/1">{author}</Link>
+      <span className={styles.Title}>{title}</span>
+      <span>{author}</span>
     </div>
   );
 }
