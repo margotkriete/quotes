@@ -2,14 +2,20 @@ import React, { useEffect, useState } from "react";
 import PhotoCard from "./PhotoCard";
 import styles from "../App.module.css";
 import Header from "./Header";
+import axios from "axios";
 
-export default function Grid(): JSX.Element {
+export default function Layout(): JSX.Element {
   const [posts, setPosts] = useState<Array<Post>>([]);
 
   useEffect(() => {
-    fetch("/api/posts")
-      .then((response) => response.json())
-      .then((data) => setPosts(data.message));
+    axios
+      .get("/api/posts")
+      .then(function (response) {
+        setPosts(response.data.message);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }, []);
 
   return (
@@ -18,15 +24,13 @@ export default function Grid(): JSX.Element {
         <div className={styles.Grid}>
           <Header />
           {posts.map((p) => (
-            <>
-              <PhotoCard
-                id={p.id}
-                key={p.id}
-                title={p.title}
-                author={p.author}
-                url={p.url}
-              />
-            </>
+            <PhotoCard
+              id={p.id}
+              key={p.id}
+              title={p.title}
+              author={p.author}
+              url={p.url}
+            />
           ))}
         </div>
       </div>

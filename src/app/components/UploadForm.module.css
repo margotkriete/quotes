@@ -1,6 +1,5 @@
 .Container {
     display: flex;
-    align-self: center;
     flex-direction: column;
     row-gap: 10px;
 }
