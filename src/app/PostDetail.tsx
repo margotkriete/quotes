@@ -9,10 +9,15 @@ export default function PostDetail(): JSX.Element {
   const [post, setPost] = useState<Post>();
 
   useEffect(() => {
-    const post = id ? getPost(id) : null;
-    if (post) {
-      setPost(post);
-    }
+    const fetchPosts = async () => {
+      if (id) {
+        const post = await getPost(id);
+        if (post) {
+          setPost(post);
+        }
+      }
+    };
+    fetchPosts().catch(console.error);
   }, []);
 
   return (

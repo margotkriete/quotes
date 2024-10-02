@@ -8,7 +8,13 @@ export default function Layout(): JSX.Element {
   const [posts, setPosts] = useState<Array<Post>>([]);
 
   useEffect(() => {
-    setPosts(getPosts());
+    const fetchPosts = async () => {
+      const posts = await getPosts();
+      if (posts) {
+        setPosts(posts);
+      }
+    };
+    fetchPosts().catch(console.error);
   }, []);
 
   return (
