@@ -2,20 +2,13 @@ import React, { useEffect, useState } from "react";
 import PhotoCard from "./PhotoCard";
 import styles from "../App.module.css";
 import Header from "./Header";
-import axios from "axios";
+import { getPosts } from "../apiService";
 
 export default function Layout(): JSX.Element {
   const [posts, setPosts] = useState<Array<Post>>([]);
 
   useEffect(() => {
-    axios
-      .get("/api/posts")
-      .then(function (response) {
-        setPosts(response.data.message);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    setPosts(getPosts());
   }, []);
 
   return (

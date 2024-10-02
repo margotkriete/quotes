@@ -1,26 +1,13 @@
 import React from "react";
 import styles from "./UploadForm.module.css";
-import axios from "axios";
+import { upload } from "../apiService";
 
 export default function UploadForm(): JSX.Element {
   async function onSubmitForm(e: any) {
     e.preventDefault();
-
     const form = e.target;
     const formData = new FormData(form);
-
-    axios
-      .post("/api/upload", {
-        title: formData.get("title"),
-        author: formData.get("author"),
-        note: formData.get("note"),
-      })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    upload(formData);
   }
 
   return (

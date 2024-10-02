@@ -2,13 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./PhotoCard.module.css";
 
-interface PhotoCardProps {
-  id: number;
-  title: string;
-  author: string;
-  url: string;
-}
-
 export default function PhotoCard({
   id,
   title,

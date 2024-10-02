@@ -2,21 +2,17 @@ import React, { useEffect, useState } from "react";
 import Header from "./components/Header";
 import styles from "./App.module.css";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import { getPost } from "./apiService";
 
 export default function PostDetail(): JSX.Element {
   const { id } = useParams();
   const [post, setPost] = useState<Post>();
 
   useEffect(() => {
-    axios
-      .get(`/api/post/${id}`)
-      .then(function (response) {
-        setPost(response.data.message[0]);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    const post = id ? getPost(id) : null;
+    if (post) {
+      setPost(post);
+    }
   }, []);
 
   return (
