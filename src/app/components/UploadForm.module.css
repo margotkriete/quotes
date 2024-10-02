@@ -1,0 +1,41 @@
+.Container {
+    display: flex;
+    align-self: center;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.Container input, button {
+    font-family: 'GT-Alpina';
+}
+
+.UploadDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid;
+    height: 150px;
+    width: 500px;
+}
+
+.UploadButton {
+    text-align: center;
+}
+
+.UploadButton::file-selector-button {
+    text-align: center;
+    font-family: 'GT-Alpina';
+}
+
+.Input {
+    background: #F5F0E8;
+    border: 1px solid;
+    padding: 20px;
+}
+
+.AddButton {
+    background: #000;
+    border: 0px solid;
+    color: #fff;
+    padding: 10px;
+}

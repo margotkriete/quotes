@@ -5,7 +5,7 @@ import {
   BrowserRouter as Router,
 } from "react-router-dom";
 import PostDetail from "./PostDetail";
-import Grid from "./components/Grid";
+import Layout from "./components/Layout";
 import Upload from "./Upload";
 
 function App(): JSX.Element {
@@ -13,7 +13,7 @@ function App(): JSX.Element {
     <>
       <Router>
         <Switch>
-          <Route path="/" element={<Grid />} />
+          <Route path="/" element={<Layout />} />
           <Route path="/post/:id" element={<PostDetail />} />
           <Route path="/upload" element={<Upload />} />
         </Switch>
