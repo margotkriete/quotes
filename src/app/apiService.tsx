@@ -1,18 +1,15 @@
 import axios from "axios";
 
-export function upload(formData: any) {
-  axios
-    .post("/api/upload", {
-      title: formData.get("title"),
-      author: formData.get("author"),
-      note: formData.get("note"),
-    })
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+// TODO: rename this file and fix up types
+
+export async function upload(formData: any): Promise<any> {
+  const signedURL = await axios.post("/api/get-signed-url");
+  axios.post("/api/upload-to-r2", { signedURL: signedURL });
+  axios.post("/api/post", {
+    title: formData.get("title"),
+    author: formData.get("author"),
+    note: formData.get("note"),
+  });
 }
 
 export async function getPost(id: string): Promise<Post | void> {
