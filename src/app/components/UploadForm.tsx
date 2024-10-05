@@ -1,13 +1,20 @@
 import React from "react";
 import styles from "./UploadForm.module.css";
-import { upload } from "../apiService";
+import { upload, createPost } from "../apiService";
 
 export default function UploadForm(): JSX.Element {
   async function onSubmitForm(e: any) {
     e.preventDefault();
-    const form = e.target;
-    const formData = new FormData(form);
-    upload(formData);
+    const formData: any = new FormData(e.target);
+    const signedUrl: any = await upload(formData.get("uploadedImg"));
+    const post: CreatePostProps = {
+      title: formData.get("title"),
+      author: formData.get("author"),
+      note: formData.get("note"),
+      url: signedUrl,
+    };
+    const newPostId = await createPost(post);
+    console.log("new post", newPostId);
   }
 
   return (
