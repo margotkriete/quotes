@@ -1,20 +1,25 @@
 import React from "react";
 import styles from "./UploadForm.module.css";
 import { upload, createPost } from "../apiService";
+import { useNavigate } from "react-router-dom";
 
 export default function UploadForm(): JSX.Element {
-  async function onSubmitForm(e: any) {
+  const navigate = useNavigate();
+  async function onSubmitForm(e: any): Promise<Response | undefined> {
     e.preventDefault();
     const formData: any = new FormData(e.target);
-    const signedUrl: any = await upload(formData.get("uploadedImg"));
+    const signedUrl = await upload(formData.get("uploadedImg"));
     const post: CreatePostProps = {
       title: formData.get("title"),
       author: formData.get("author"),
       note: formData.get("note"),
-      url: signedUrl,
+      url: signedUrl || "",
     };
     const newPostId = await createPost(post);
-    console.log("new post", newPostId);
+    if (!!newPostId) {
+      navigate("/");
+    }
+    return;
   }
 
   return (

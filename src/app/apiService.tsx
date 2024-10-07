@@ -1,12 +1,21 @@
 import axios from "axios";
 
-export async function upload(file: any): Promise<any> {
-  const resp: any = await axios.post("/api/get-signed-url");
-  const signedURL: string = resp.data.url;
-  const result = await axios.put(signedURL, file, {
-    headers: { "Content-Type": file.type },
-  });
-  return result.data.url;
+function getPublicBucketUrl(key: string): string {
+  return `https://pub-5c17239b18ba40cf8468fa65ff286b37.r2.dev/${key}`;
+}
+
+export async function upload(file: File): Promise<string | void> {
+  try {
+    // Retrieve signed URL, then PUT file contents in signed URL
+    const response = await axios.post("/api/get-signed-url");
+    const signedURL: string = response.data.url;
+    await axios.put(signedURL, file, {
+      headers: { "Content-Type": file.type },
+    });
+    return getPublicBucketUrl(response.data.key);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export async function createPost(
@@ -19,7 +28,7 @@ export async function createPost(
       note: post.note,
       url: post.url,
     });
-    return response.data.message.id;
+    return response.data.id;
   } catch (error) {
     console.log(error);
   }

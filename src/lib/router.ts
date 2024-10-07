@@ -22,15 +22,16 @@ router.get("/post/:postId", async (_req, res) => {
 });
 
 router.post("/get-signed-url", async (_req, res) => {
+  const key = uuidv4();
   getSignedUrl(
     r2,
     new PutObjectCommand({
       Bucket: process.env.R2_BUCKET_NAME,
-      Key: uuidv4(),
+      Key: key,
     }),
     { expiresIn: 60 }
   ).then((signedUrl) => {
-    res.status(200).json({ url: signedUrl });
+    res.status(200).json({ url: signedUrl, key: key });
   });
 });
 
