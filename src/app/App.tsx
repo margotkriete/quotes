@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import PostDetail from "./PostDetail";
 import Layout from "./components/Layout";
+import Login from "./Login";
 import Upload from "./Upload";
 
 function App(): JSX.Element {
@@ -16,6 +17,7 @@ function App(): JSX.Element {
           <Route path="/" element={<Layout />} />
           <Route path="/post/:id" element={<PostDetail />} />
           <Route path="/upload" element={<Upload />} />
+          <Route path="/login" element={<Login />} />
         </Switch>
       </Router>
     </>

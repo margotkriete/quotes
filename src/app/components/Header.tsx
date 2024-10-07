@@ -9,7 +9,9 @@ export default function Header({
   return (
     <header className={styles.GridHeader}>
       <Link to="/">{title ? title : "Quotes"}</Link>{" "}
-      {breadcrumbs && `> ${breadcrumbs}`}
+      {breadcrumbs && (
+        <span className={styles.Breadcrumbs}>&gt; {breadcrumbs}</span>
+      )}
       <hr className={styles.HeaderLine} />
     </header>
   );

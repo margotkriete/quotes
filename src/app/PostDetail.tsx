@@ -29,6 +29,7 @@ export default function PostDetail(): JSX.Element {
             <div>
               <img src={post.url} width={500} />
             </div>
+            {post.note && <span className={styles.Note}>{post.note}</span>}
           </div>
         </div>
       )}
