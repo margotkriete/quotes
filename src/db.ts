@@ -30,12 +30,3 @@ export const usersTable = pgTable("users", {
   username: text("username").notNull().unique(),
   hashed_password: bytea("hashed_password"),
 });
-
-// export const createUser = async () => {
-//   console.info("creating user");
-//   const hashedPassword = await bcrypt.hash("pw-here", 8);
-//   await db.insert(usersTable).values({
-//     username: "username-here",
-//     hashed_password: hashedPassword,
-//   });
-// };

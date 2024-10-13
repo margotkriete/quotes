@@ -7,8 +7,12 @@ import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { v4 as uuidv4 } from "uuid";
 
 var passport = require("passport");
-var LocalStrategy = require("passport-local");
+
+const router = express.Router();
+
 const bcrypt = require("bcrypt");
+var LocalStrategy = require("passport-local");
+const INCORRECT_MSG = "Incorrect username or password";
 
 interface User {
   id: number;
@@ -16,12 +20,10 @@ interface User {
   hashed_password: Buffer;
 }
 
-const INCORRECT_MSG = "Incorrect username or password";
-
 passport.use(
   new LocalStrategy(async function verify(
     username: string,
-    password: any,
+    password: string,
     cb: any
   ) {
     const row = (await db
@@ -39,30 +41,34 @@ passport.use(
   })
 );
 
-passport.serializeUser(function (user: any, cb: any) {
-  process.nextTick(function () {
-    cb(null, { id: user.id, username: user.username });
-  });
-});
+// passport.serializeUser(function (user: any, cb: any) {
+//   console.log("serialzing user", user);
 
-passport.deserializeUser(function (user: any, cb: any) {
-  process.nextTick(function () {
-    return cb(null, user);
-  });
-});
+//   process.nextTick(function () {
+//     cb(null, { id: user.id, username: user.username });
+//   });
+// });
 
-const router = express.Router();
+// passport.deserializeUser(function (user: any, cb: any) {
+//   console.log("!!deserializing user", user);
+
+//   process.nextTick(function () {
+//     return cb(null, user);
+//   });
+// });
 
 router.get("/posts", async (_req, res) => {
   const result = await db.select().from(postsTable);
   res.status(200).json({ message: result });
 });
 
-router.get("/post/:postId", async (_req, res) => {
+router.get("/post/:postId", async (req: any, res) => {
+  console.info("req", req.user);
+
   const result = await db
     .select()
     .from(postsTable)
-    .where(eq(postsTable.id, Number(_req.params.postId)));
+    .where(eq(postsTable.id, Number(req.params.postId)));
   res.status(200).json({ message: result });
 });
 
@@ -91,20 +97,10 @@ router.post("/post", async (_req, res) => {
 
 router.post(
   "/login/password",
-  passport.authenticate("local", {}),
-  function (_req, res) {
-    console.log("updating result");
-    res.status(200).json({ message: "test" });
+  passport.authenticate("local"),
+  function (req: any, res) {
+    res.status(200).json({ user: req.user.username });
   }
 );
-
-// router.post("/logout", function (req, res, next) {
-//   req.logout(function (err) {
-//     if (err) {
-//       return next(err);
-//     }
-//     res.redirect("/");
-//   });
-// });
 
 export default router;

@@ -7,12 +7,12 @@ export default function UploadForm(): JSX.Element {
   const navigate = useNavigate();
   async function onSubmitForm(e: any): Promise<Response | undefined> {
     e.preventDefault();
-    const formData: any = new FormData(e.target);
-    const signedUrl = await upload(formData.get("uploadedImg"));
+    const formData = new FormData(e.target);
+    const signedUrl = await upload(formData.get("uploadedImg") as File);
     const post: CreatePostProps = {
-      title: formData.get("title"),
-      author: formData.get("author"),
-      note: formData.get("note"),
+      title: formData.get("title") as string,
+      author: formData.get("author") as string,
+      note: formData.get("note") as string,
       url: signedUrl || "",
     };
     const newPostId = await createPost(post);
@@ -38,6 +38,7 @@ export default function UploadForm(): JSX.Element {
               type="file"
               name="uploadedImg"
               accept="image/png, image/jpeg"
+              required
             />
           </div>
           <input

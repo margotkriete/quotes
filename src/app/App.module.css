@@ -19,3 +19,18 @@
 .Note {
   grid-column: 2 / 5;
 }
+
+.Input {
+  background: #F5F0E8;
+  border: 1px solid;
+  padding: 20px;
+  font-family: 'GT-Alpina';
+  margin-bottom: 10px;
+}
+
+.LoginButton {
+  background: #000;
+  border: 0px solid;
+  color: #fff;
+  padding: 10px;
+}

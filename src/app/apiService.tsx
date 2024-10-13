@@ -19,11 +19,15 @@ export async function upload(file: File): Promise<string | void> {
 }
 
 export async function submitLogin(username: string, password: string) {
-  const response = await axios.post("/api/login/password", {
-    username: username,
-    password: password,
-  });
-  console.info("response", response);
+  try {
+    const response: any = await axios.post("/api/login/password", {
+      username: username,
+      password: password,
+    });
+    return response.username;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export async function createPost(

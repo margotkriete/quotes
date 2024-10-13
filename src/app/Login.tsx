@@ -2,15 +2,20 @@ import React from "react";
 import Header from "./components/Header";
 import styles from "./App.module.css";
 import { submitLogin } from "./apiService";
+import { useNavigate } from "react-router-dom";
 
 export default function Login(): JSX.Element {
+  const navigate = useNavigate();
+
   const submitForm = async (e: any) => {
     e.preventDefault();
     const data = new FormData(e.target);
-    if (!!data.get("username") && !!data.get("password")) {
-      const username: string = data.get("username") as string;
-      const password: string = data.get("password") as string;
-      await submitLogin(username, password);
+    const username: string = data.get("username") as string;
+    const password: string = data.get("password") as string;
+    const user = (await submitLogin(username, password)) as any;
+    if (user) {
+      console.info("user", user);
+      navigate("/");
     }
   };
 
@@ -35,7 +40,9 @@ export default function Login(): JSX.Element {
               id="current-password"
               required
             />
-            <button type="submit">Sign in</button>
+            <button type="submit" className={styles.LoginButton}>
+              Sign in
+            </button>
           </form>
         </div>
       </div>
