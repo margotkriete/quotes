@@ -37,25 +37,17 @@ passport.use(
     if (!matchedPw) {
       return cb(null, false, { message: INCORRECT_MSG });
     }
-    return cb(null, row[0]);
+    return cb(null, row[0].username);
   })
 );
 
-// passport.serializeUser(function (user: any, cb: any) {
-//   console.log("serialzing user", user);
-
-//   process.nextTick(function () {
-//     cb(null, { id: user.id, username: user.username });
-//   });
-// });
-
-// passport.deserializeUser(function (user: any, cb: any) {
-//   console.log("!!deserializing user", user);
-
-//   process.nextTick(function () {
-//     return cb(null, user);
-//   });
-// });
+router.post(
+  "/login/password",
+  passport.authenticate("local"),
+  function (req: any, res) {
+    res.status(200).json({ username: req.user });
+  }
+);
 
 router.get("/posts", async (_req, res) => {
   const result = await db.select().from(postsTable);
@@ -63,8 +55,6 @@ router.get("/posts", async (_req, res) => {
 });
 
 router.get("/post/:postId", async (req: any, res) => {
-  console.info("req", req.user);
-
   const result = await db
     .select()
     .from(postsTable)
@@ -94,13 +84,5 @@ router.post("/post", async (_req, res) => {
       res.status(200).json({ id: result[0].id });
     });
 });
-
-router.post(
-  "/login/password",
-  passport.authenticate("local"),
-  function (req: any, res) {
-    res.status(200).json({ user: req.user.username });
-  }
-);
 
 export default router;

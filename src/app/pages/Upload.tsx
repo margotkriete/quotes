@@ -1,7 +1,7 @@
 import React from "react";
-import Header from "./components/Header";
-import UploadForm from "./components/UploadForm";
-import styles from "./App.module.css";
+import Header from "./../components/Header";
+import UploadForm from "./../components/UploadForm";
+import styles from "./../App.module.css";
 
 export default function Upload(): JSX.Element {
   return (

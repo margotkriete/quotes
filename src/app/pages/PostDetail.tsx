@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Header from "./components/Header";
-import styles from "./App.module.css";
+import Header from "./../components/Header";
+import styles from "./../App.module.css";
 import { useParams } from "react-router-dom";
-import { getPost } from "./apiService";
+import { getPost } from "./../apiService";
 
 export default function PostDetail(): JSX.Element {
   const { id } = useParams();

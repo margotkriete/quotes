@@ -36,16 +36,12 @@ app.use(passport.session());
 app.use("/api", router);
 
 passport.serializeUser(function (user: any, cb: any) {
-  console.log("serialzing user", user);
-
   process.nextTick(function () {
     cb(null, { id: user.id, username: user.username });
   });
 });
 
 passport.deserializeUser(function (user: any, cb: any) {
-  console.log("!!123deserializing user", user);
-
   process.nextTick(function () {
     return cb(null, user);
   });

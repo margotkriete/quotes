@@ -18,13 +18,16 @@ export async function upload(file: File): Promise<string | void> {
   }
 }
 
-export async function submitLogin(username: string, password: string) {
+export async function submitLogin(
+  username: string,
+  password: string
+): Promise<string | void> {
   try {
-    const response: any = await axios.post("/api/login/password", {
+    const response: any = (await axios.post("/api/login/password", {
       username: username,
       password: password,
-    });
-    return response.username;
+    })) as string;
+    return response.data.username;
   } catch (error) {
     console.log(error);
   }
