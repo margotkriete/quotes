@@ -4,9 +4,7 @@ The site allows me to upload these images and tag them with a title, author, and
 
 ### Implementation details
 
-The site uses React with TypeScript on the frontend and Node with Express on the backend. Styling uses CSS modules, API requests use `axios`, images are hosted in R2, and the Postgres database is managed with Neon.
-
-TODO: add notes on login
+The site uses React with TypeScript on the frontend and Node with Express on the backend. Styling uses CSS modules, API requests use `axios`, images are hosted in R2, and the Postgres database is managed with Neon. The `/upload` page is gated by login using PassportJS.
 
 ### Future tasks
 
@@ -18,4 +16,4 @@ Future improvements I'd like to make include, but are not limited to:
 
 ### Transcription
 
-A natural feature for this site is the ability to auto-transcribe each quote for further processing, categorizing, or analysis. At the moment, I'd rather tag images manually; until I find a good use case for analysis, I'd prefer to keep the images as images, rather than text - I like seeing the background and the physical page I read, keeping it low-fi, ish?
+A natural feature for this site is the ability to auto-transcribe each quote for further processing, categorizing, or analysis. At the moment, I'd rather tag images manually; until I find a good use case, I'd prefer to keep the images as images, rather than text. I like seeing the background and the physical page I read, keeping it somewhat "low-fi."

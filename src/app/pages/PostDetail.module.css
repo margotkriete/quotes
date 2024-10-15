@@ -1,3 +1,32 @@
 .Note {
-    grid-column: 2 / span 4;
+    grid-column: 2 / 5;
+}
+
+.Container {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 40px;
+}
+
+.Grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 850px;
+    gap: 15px;
+    padding-top: 50px;
+}
+
+.Input {
+    background: #F5F0E8;
+    border: 1px solid;
+    padding: 20px;
+    font-family: 'GT-Alpina';
+    margin-bottom: 10px;
+}
+
+.AddButton {
+    background: #000;
+    border: 0px solid;
+    color: #fff;
+    padding: 10px;
 }

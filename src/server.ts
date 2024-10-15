@@ -27,12 +27,6 @@ app.use(
 app.use(passport.authenticate("session"));
 app.use(passport.session());
 
-// app.use(function (req: any, res, next) {
-//   res.locals.login = req.isAuthenticated();
-//   next();
-// });
-
-// Serve API requests from the router
 app.use("/api", router);
 
 passport.serializeUser(function (user: any, cb: any) {

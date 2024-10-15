@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Header from "./../components/Header";
-import styles from "./../App.module.css";
+import styles from "./PostDetail.module.css";
 import { useParams } from "react-router-dom";
-import { getPost } from "./../apiService";
+import { getPost, updatePost } from "./../apiService";
+import { useAuth } from "../providers/AuthProvider";
 
 export default function PostDetail(): JSX.Element {
   const { id } = useParams();
   const [post, setPost] = useState<Post>();
+  const [note, setNote] = useState<string>("");
+  const auth = useAuth();
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -20,6 +23,14 @@ export default function PostDetail(): JSX.Element {
     fetchPosts().catch(console.error);
   }, []);
 
+  const addNote = async (e: any) => {
+    e.preventDefault();
+    if (id && note) {
+      const res = await updatePost(id, note);
+      console.log(res);
+    }
+  };
+
   return (
     <>
       {post && (
@@ -29,7 +40,22 @@ export default function PostDetail(): JSX.Element {
             <div>
               <img src={post.url} width={500} />
             </div>
-            {post.note && <span className={styles.Note}>{post.note}</span>}
+            {post.note || note ? (
+              <span className={styles.Note}>{post.note}</span>
+            ) : auth.token ? (
+              <div>
+                <input
+                  className={styles.Input}
+                  value={note}
+                  onChange={(e) => setNote(e.target.value)}
+                  name="note"
+                  placeholder="Note"
+                />
+                <button className={styles.AddButton} onClick={addNote}>
+                  Add note
+                </button>
+              </div>
+            ) : null}
           </div>
         </div>
       )}

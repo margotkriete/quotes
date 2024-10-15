@@ -76,13 +76,21 @@ router.post("/get-signed-url", async (_req, res) => {
   });
 });
 
-router.post("/post", async (_req, res) => {
+router.post("/post", async (req, res) => {
   db.insert(postsTable)
-    .values(_req.body)
+    .values(req.body)
     .returning()
     .then((result) => {
       res.status(200).json({ id: result[0].id });
     });
+});
+
+router.patch("/post/:postId", async (req: any, res) => {
+  await db
+    .update(postsTable)
+    .set({ note: req.body["note"] })
+    .where(eq(postsTable.id, req.params.postId));
+  res.status(200);
 });
 
 export default router;

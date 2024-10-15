@@ -66,3 +66,12 @@ export async function getPosts(): Promise<Post[] | void> {
     console.log(error);
   }
 }
+
+export async function updatePost(id: string, note: string): Promise<void> {
+  try {
+    const response = await axios.patch(`/api/post/${id}`, { note: note });
+    return response.data.id;
+  } catch (error) {
+    console.log(error);
+  }
+}
