@@ -89,8 +89,10 @@ router.patch("/post/:postId", async (req: any, res) => {
   await db
     .update(postsTable)
     .set({ note: req.body["note"] })
-    .where(eq(postsTable.id, req.params.postId));
-  res.status(200);
+    .where(eq(postsTable.id, req.params.postId))
+    .then((_res) => {
+      res.status(200).json({ id: req.params.postId });
+    });
 });
 
 export default router;

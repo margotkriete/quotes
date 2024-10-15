@@ -25,8 +25,11 @@ export default function PostDetail(): JSX.Element {
 
   const addNote = async (e: any) => {
     e.preventDefault();
-    if (id && note) {
-      const res = await updatePost(id, note);
+    if (id && note && post) {
+      const res: any = await updatePost(id, note);
+      if (res) {
+        setPost({ ...post, note: note });
+      }
       console.log(res);
     }
   };
@@ -40,7 +43,7 @@ export default function PostDetail(): JSX.Element {
             <div>
               <img src={post.url} width={500} />
             </div>
-            {post.note || note ? (
+            {post.note ? (
               <span className={styles.Note}>{post.note}</span>
             ) : auth.token ? (
               <div>
